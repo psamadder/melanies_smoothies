@@ -5,7 +5,7 @@ from snowflake.snowpark.functions import col
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie :cup_with_straw:")
 st.write(
-    """Coose the fruit you want in your custom Smoothie!
+    """Choose the fruit you want in your custom Smoothie!
     """)
 cnx = st.connection("snowflake")
 session = cnx.session()
@@ -33,4 +33,10 @@ time_to_insert = st.button('Submit Order')
 if time_to_insert:
     session.sql(my_insert_stmt).collect()
     st.success('Your Smoothie is ordered!', icon="✅")
+
+#New section to display smoothiefruit nutrition information
+import requests
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
+
     
